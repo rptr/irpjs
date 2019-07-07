@@ -15,5 +15,5 @@ class IRPApp (WebSocketApplication):
     def on_close (self, reason):
         print("close", reason)
 
-addr = ('', 8000)
+addr = ('0.0.0.0', 8000)
 WebSocketServer(addr, Resource(OrderedDict([('/', IRPApp)]))).serve_forever()
