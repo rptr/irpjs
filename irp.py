@@ -6,6 +6,25 @@ import json
 from collections import OrderedDict
 from geventwebsocket import WebSocketServer, WebSocketApplication, Resource
 
+import sys
+sys.path.append('../libresign')
+import unoremote
+
+# TODO create some interface(?) in unoremote.py to inherit from
+class Libo ():
+    def on_slideshow_started (self):
+        pass
+
+    def on_slideshow_ended (self):
+        pass
+
+    def focus_info_screen (self):
+        pass
+
+control = Libo()
+uno = unoremote.UNOClient(control)
+uno.start()
+
 class IRPApp (WebSocketApplication):
     def on_open (self):
         self.connected = False
