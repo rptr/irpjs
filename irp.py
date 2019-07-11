@@ -52,22 +52,22 @@ class IRPApp (WebSocketApplication):
         if 'transition_next' == action:
             print('foward')
 
-        elif 'transition_previous' == action
+        elif 'transition_previous' == action:
             print('backward')
 
-        elif 'goto_slide' == action
+        elif 'goto_slide' == action:
             print('goto slide')
 
-        elif 'presentation_start' == action
+        elif 'presentation_start' == action:
             print('start')
 
-        elif 'presentation_stop' == action
+        elif 'presentation_stop' == action:
             print('stop')
 
-        elif 'presentation_blank_screen' == action
+        elif 'presentation_blank_screen' == action:
             print('blank')
 
-        elif 'presentation_resume' == action
+        elif 'presentation_resume' == action:
             print('resume')
 
     def on_close (self, reason):
