@@ -49,26 +49,31 @@ class IRPApp (WebSocketApplication):
     def irp_msg (self, msg):
         action = msg["action"]
 
+        # TODO add exceptions for msg["xxxx"] in case there's no such key
+
+        # NOTE it could be imagined that we'd want to process/ make checks
+        #      before calling the UNOClient methods
         if 'transition_next' == action:
-            print('foward')
+            uno.transition_next()
 
         elif 'transition_previous' == action:
-            print('backward')
+            uno.transition_previous()
 
         elif 'goto_slide' == action:
-            print('goto slide')
+            number = msg["number"]
+            uno.goto_slide(number)
 
         elif 'presentation_start' == action:
-            print('start')
+            uno.presentation_start()
 
         elif 'presentation_stop' == action:
-            print('stop')
+            uno.presentation_stop()
 
         elif 'presentation_blank_screen' == action:
-            print('blank')
+            uno.blank_screen()
 
         elif 'presentation_resume' == action:
-            print('resume')
+            uno.resume()
 
     def on_close (self, reason):
         print("close", reason)
