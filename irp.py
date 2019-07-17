@@ -13,24 +13,52 @@ import unoremote
 # TODO create some interface(?) in unoremote.py to inherit from
 class Libo (unoremote.LiboListener):
     # TODO we need number of slides and current slide number
-    def on_slideshow_started (self):
-        print("started")
+    def on_slideshow_started (self, num_slides, current_slide):
+        count = 3
+        current_slide = 0
+        data = json.dumps(
+            {
+                "action"        : "slideshow_started",
+                "slide_count"   : count,
+                "current_slide" : current_slide
+            })
+        send_all(data)
 
     def on_slideshow_ended (self):
-        print("finished")
+        send_all('{"event" : "slideshow_finished"}')
+
+    def on_slide_notes (self, slide_index, html):
+        data = json.dumps(
+            {
+                "action"        : "slide_notes",
+                "slide_index"   : slide_index,
+                "html"          : html 
+            })
+        send_all(data)
+
+    def on_slide_updated (self, slide_index):
+        pass
+
+    def on_slide_preview (self, slide_index, image):
+        pass
+
+def send_all (msg):
+    for ws in clients:
+        ws.send(msg)
 
 control = Libo()
 uno = unoremote.UNOClient(control)
 uno.start(True)
+clients = []
 
 class IRPApp (WebSocketApplication):
     def on_open (self):
+        global clients
+        clients.append(self.ws)
         self.connected = False
         print("new conn")
 
     def on_message (self, message):
-
-        print(message)
 
         # handshake
         if '\"hello\"' == message:
