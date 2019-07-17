@@ -56,6 +56,7 @@ class IRPApp (WebSocketApplication):
         global clients
         clients.append(self.ws)
         self.connected = False
+
         print("new conn")
 
     def on_message (self, message):
@@ -104,7 +105,11 @@ class IRPApp (WebSocketApplication):
             uno.resume()
 
     def on_close (self, reason):
+        global clients
+        clients.remove(self.ws)
+
         print("close", reason)
+
 
 addr = ('0.0.0.0', 8000)
 WebSocketServer(addr, Resource(OrderedDict([('/', IRPApp)]))).serve_forever()
