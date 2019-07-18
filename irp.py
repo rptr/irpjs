@@ -25,7 +25,7 @@ class Libo (unoremote.LiboListener):
         send_all(data)
 
     def on_slideshow_ended (self):
-        send_all('{"event" : "slideshow_finished"}')
+        send_all('{"action" : "slideshow_finished"}')
 
     def on_slide_notes (self, slide_index, html):
         data = json.dumps(
