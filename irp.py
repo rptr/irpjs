@@ -14,12 +14,10 @@ import unoremote
 class Libo (unoremote.LiboListener):
     # TODO we need number of slides and current slide number
     def on_slideshow_started (self, num_slides, current_slide):
-        count = 3
-        current_slide = 0
         data = json.dumps(
             {
                 "action"        : "slideshow_started",
-                "slide_count"   : count,
+                "slide_count"   : num_slides,
                 "current_slide" : current_slide
             })
         send_all(data)
@@ -37,10 +35,21 @@ class Libo (unoremote.LiboListener):
         send_all(data)
 
     def on_slide_updated (self, slide_index):
-        pass
+        data = json.dumps(
+            {
+                "action"        : "slide_updated",
+                "slide_index"   : slide_index,
+            })
+        send_all(data)
 
     def on_slide_preview (self, slide_index, image):
-        pass
+        data = json.dumps(
+            {
+                "action"        : "slide_preview",
+                "slide_index"   : slide_index,
+                "image"         : ""
+            })
+        send_all(data)
 
 def send_all (msg):
     for ws in clients:
