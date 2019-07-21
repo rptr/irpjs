@@ -70,6 +70,7 @@ class IRPApp (WebSocketApplication):
 
         # disconnected
         elif None == message:
+            # TODO do something?
             pass
 
         else:
@@ -111,6 +112,6 @@ class IRPApp (WebSocketApplication):
 
         print("close", reason)
 
-
-addr = ('0.0.0.0', 8000)
-WebSocketServer(addr, Resource(OrderedDict([('/', IRPApp)]))).serve_forever()
+def run_irp_server(address = '0.0.0.0', port = 8000):
+    addr = (address, port)
+    WebSocketServer(addr, Resource(OrderedDict([('/', IRPApp)]))).serve_forever()
