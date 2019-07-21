@@ -6,13 +6,8 @@ import json
 from collections import OrderedDict
 from geventwebsocket import WebSocketServer, WebSocketApplication, Resource
 
-import sys
-sys.path.append('../libresign')
-import unoremote
-
 # TODO create some interface(?) in unoremote.py to inherit from
-class Libo (unoremote.LiboListener):
-    # TODO we need number of slides and current slide number
+class Libo ():
     def on_slideshow_started (self, num_slides, current_slide):
         data = json.dumps(
             {
@@ -55,9 +50,6 @@ def send_all (msg):
     for ws in clients:
         ws.send(msg)
 
-control = Libo()
-uno = unoremote.UNOClient(control)
-uno.start(True)
 clients = []
 
 class IRPApp (WebSocketApplication):

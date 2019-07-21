@@ -13,5 +13,5 @@ export LD_LIBRARY_PATH=$libo
 export UNO_PATH=$libo
 export URE_BOOTSTRAP=$libo/fundamentalrc
 
-./irp.py $@
+./standalone.py $@
 
