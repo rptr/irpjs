@@ -42,9 +42,12 @@ class Libo ():
             {
                 "action"        : "slide_preview",
                 "slide_index"   : slide_index,
-                "image"         : ""
+                "image"         : image
             })
         send_all(data)
+
+    def focus_info_screen (self):
+        pass
 
 def send_all (msg):
     for ws in clients:
@@ -115,3 +118,16 @@ class IRPApp (WebSocketApplication):
 def run_irp_server(address = '0.0.0.0', port = 8000):
     addr = (address, port)
     WebSocketServer(addr, Resource(OrderedDict([('/', IRPApp)]))).serve_forever()
+
+if __name__ == '__main__':
+    import sys
+    # TODO get cmd line arg for path
+    sys.path.append('../libresign')
+    import unoremote
+    
+    control = Libo()
+    uno = unoremote.UNOClient(control)
+    uno.start(True)
+
+    run_irp_server()
+
