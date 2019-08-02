@@ -69,6 +69,7 @@ class IRPApp (WebSocketApplication):
         if '\"hello\"' == message:
             self.ws.send('hello')
             self.connected = True
+            uno.send_slide_info()
             print('recv handshake')
 
         # disconnected
