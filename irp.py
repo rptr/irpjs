@@ -49,6 +49,9 @@ class Libo ():
     def focus_info_screen (self):
         pass
 
+    def error_no_document (self):
+        print('error: no document')
+
 def send_all (msg):
     for ws in clients:
         ws.send(msg)
