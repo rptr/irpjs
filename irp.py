@@ -126,8 +126,7 @@ def run_irp_server(address = '0.0.0.0', port = 8000):
 if __name__ == '__main__':
     import sys
     # TODO get cmd line arg for path
-    sys.path.append('../libresign')
-    import unoremote
+    import libresign.unoremote as unoremote
     
     control = Libo()
     uno = unoremote.UNOClient(control)
