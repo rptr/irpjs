@@ -119,7 +119,7 @@ class IRPApp (WebSocketApplication):
 
         print("close", reason)
 
-def run_irp_server(address = '0.0.0.0', port = 8000):
+def run_irp_server(address = '0.0.0.0', port = 5100):
     addr = (address, port)
     WebSocketServer(addr, Resource(OrderedDict([('/', IRPApp)]))).serve_forever()
 
