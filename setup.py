@@ -10,4 +10,7 @@ setuptools.setup(
     description="Server for the JavaScript LibreOffice Impress Remote.",
     url="https://rptr.github.io/gsoc/",
     packages=setuptools.find_packages(),
+    install_requires=[
+        "gevent-websocket"
+    ],
 )
